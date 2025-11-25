@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Chat</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <h1>Project Chat</h1>
+  <div id="login">
+    <input type="email" id="email" placeholder="ایمیل">
+    <button onclick="login()">ورود</button>
+  </div>
+
+  <div id="chatApp" style="display:none;">
+    <h2>پروژه‌ها</h2>
+    <ul id="projects"></ul>
+    <div id="messagesContainer" style="display:none;">
+      <h3 id="projectTitle"></h3>
+      <div id="messages" class="messages"></div>
+      <input type="text" id="msgInput" placeholder="پیام خود را بنویسید">
+      <button onclick="sendMessage()">ارسال</button>
+      <button onclick="backProjects()">بازگشت</button>
+    </div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
