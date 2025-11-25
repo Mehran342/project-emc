@@ -29,3 +29,40 @@ app.post('/api/login', (req, res) => {
 
 // گرفتن لیست پروژه‌ها
 app.get('/api/projects', (req, res) => {
+  const db = readDB();
+  res.json(db.projects);
+});
+
+// ایجاد پروژه جدید
+app.post('/api/projects', (req, res) => {
+  const db = readDB();
+  const project = { id: Date.now().toString(), title: req.body.title };
+  db.projects.push(project);
+  writeDB(db);
+  res.json(project);
+});
+
+// گرفتن پیام‌های یک پروژه
+app.get('/api/messages/:projectId', (req, res) => {
+  const db = readDB();
+  const projectId = req.params.projectId;
+  const messages = db.messages.filter(m => m.projectId === projectId);
+  res.json(messages);
+});
+
+// ارسال پیام جدید به پروژه
+app.post('/api/messages/:projectId', (req, res) => {
+  const db = readDB();
+  const projectId = req.params.projectId;
+  const { author, text } = req.body;
+  const message = { projectId, author, text };
+  db.messages.push(message);
+  writeDB(db);
+  res.json(message);
+});
+
+// اجرای سرور روی پورت 4000
+const PORT = 4000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
